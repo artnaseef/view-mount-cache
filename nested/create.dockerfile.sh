@@ -1,0 +1,20 @@
+#!/bin/sh
+
+MOUNT_FLAGS_PARAM=""
+
+if [ -n "$CACHE_ID" ]
+then
+	MOUNT_FLAGS_PARAM="${MOUNT_FLAGS_PARAM},id=${CACHE_ID}"
+fi
+
+if [ -n "$CACHE_UID" ]
+then
+	MOUNT_FLAGS_PARAM="${MOUNT_FLAGS_PARAM},uid=${CACHE_UID}"
+fi
+
+if [ -n "$ADDITIONAL_MOUNT_FLAGS" ]
+then
+	MOUNT_FLAGS_PARAM="${MOUNT_FLAGS_PARAM},${ADDITIONAL_MOUNT_FLAGS}"
+fi
+
+sed "s|\\\${MOUNT_FLAGS}|${MOUNT_FLAGS_PARAM}|" Dockerfile.in >Dockerfile.run

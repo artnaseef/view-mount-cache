@@ -1,0 +1,5 @@
+# syntax=docker/dockerfile:experimental
+
+FROM alpine:20200428
+
+    RUN --mount=type=cache,target=/cache.d${MOUNT_FLAGS} find /cache.d -exec ls -ld '{}' ';'
